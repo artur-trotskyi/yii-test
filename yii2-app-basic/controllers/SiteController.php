@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\interfaces\MailerInterface;
 use app\models\EntryForm;
 use Yii;
 use yii\filters\AccessControl;
@@ -13,6 +14,19 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    private MailerInterface $mailer;
+
+    public function __construct($id, $module, MailerInterface $mailer, $config = [])
+    {
+        $this->mailer = $mailer;
+        parent::__construct($id, $module, $config);
+    }
+
+    public function actionSendEmail(): string
+    {
+        return $this->mailer->send('example@example.com', 'Test Subject', 'Test Body');
+    }
+
     /**
      * {@inheritdoc}
      */

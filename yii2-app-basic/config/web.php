@@ -51,6 +51,11 @@ $config = [
         ],
         */
     ],
+    'container' => [
+        'definitions' => [
+            'app\interfaces\MailerInterface' => 'app\services\SmtpMailer',
+        ],
+    ],
     'params' => $params,
 ];
 
